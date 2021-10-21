@@ -33,8 +33,9 @@ export const Header = () => {
           size="sm"
           title={<Avatar />}
         >
-          <Dropdown.Item onClick={handleLogout}>
-            Log Out
+          {}
+          <Dropdown.Item href="/signin" onClick={handleLogout}>
+            Log In
           </Dropdown.Item>
         </DropdownButton>
       </div>

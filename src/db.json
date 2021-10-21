@@ -21,14 +21,14 @@
       "confirmPassword": "023456"
     },
     {
-      "id": "xogJY-N",
-      "age": "",
-      "email": "",
-      "userName": "",
-      "firstName": "",
-      "lastName": "",
-      "password": "",
-      "confirmPassword": ""
+      "id": "x4ERTQ-",
+      "age": 14,
+      "email": "mail@mail.com",
+      "userName": "mailmali",
+      "firstName": "mail",
+      "lastName": "mali",
+      "password": "123456",
+      "confirmPassword": "123456"
     }
   ]
 }
