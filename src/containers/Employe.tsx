@@ -1,6 +1,6 @@
 import { Header } from "../components/Header"
 import { Card, Typography } from "@mui/material";
-import { Person, PersonType } from "../components/interface"
+import PersonType, { Person } from "../components"
 
 export function Employes() {
   return (
