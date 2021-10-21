@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Home, SignIn, SignUp } from './containers';
+import { Employes, Home, SignIn, SignUp } from './containers';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 
@@ -14,6 +14,9 @@ export default function App() {
           </Route>
           <Route path="/signin">
             <SignIn />
+          </Route>
+          <Route path="/employes">
+            <Employes />
           </Route>
           <Route path="/">
             <Home />
