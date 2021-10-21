@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { createContext, useState } from "react";
 import {
   Box,
@@ -5,25 +6,31 @@ import {
   Checkbox,
   Container,
   CssBaseline,
+  FormControl,
   FormControlLabel,
   Grid,
+  InputLabel,
   Link,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { Link as Moving } from "react-router-dom"
 
 const theme = createTheme();
 
 export type AuthUser = {
+  id: string
   firstName: string
   lastName: string
   userName: string
   email: string
   password: string
   confirmPassword: string
-  age: number
+  age: string
 }
 
 type DetailContextType = {
@@ -35,14 +42,25 @@ export const DetailContext = createContext({} as DetailContextType)
 
 export const SignUp = () => {
   const [details, setDetails] = useState({
+    id: "",
+    age: "",
+    email: "",
+    userName: "",
     firstName: "",
     lastName: "",
-    userName: "",
-    email: "",
     password: "",
     confirmPassword: "",
-    age: 0,
   });
+
+  const handleSubmit = (event: { preventDefault: () => void; }) => {
+    // event.preventDefault()
+    console.log(details)
+    setDetails({ ...details, id: uuidv4().toUpperCase() })
+    axios.post("http://localhost:8000/users", details)
+    return (
+      <Moving to="/dashboard">dash</Moving>
+    )
+  }
 
   return (
     <DetailContext.Provider value={{ details, setDetails }}>
@@ -139,19 +157,34 @@ export const SignUp = () => {
                   <TextField
                     required
                     fullWidth
-                    name="confirmpassword"
+                    name="password"
                     label="Confirm Password"
                     type="password"
-                    id="confirmpassword"
+                    id="password"
                     autoComplete="new-password"
                     value={details.confirmPassword}
                     onChange={(event) => {
-                      setDetails({
-                        ...details,
-                        confirmPassword: event.target.value,
-                      });
+                      setDetails({ ...details, confirmPassword: event.target.value });
                     }}
                   />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={details.age}
+                      // label="Age"
+                      onChange={(event) => {
+                        setDetails({ ...details, age: event.target.value })
+                      }}
+                    >
+                      {[...Array(100)].map((e, i) => {
+                        return <MenuItem value={i + 1}>{i + 1}</MenuItem>
+                      })}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
@@ -167,11 +200,7 @@ export const SignUp = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={(event) => {
-                  event.preventDefault()
-                  console.log(details)
-                  axios.post("http://localhost:8000/users", details)
-                }}
+                onClick={handleSubmit}
               >
                 Sign Up
               </Button>

@@ -1,21 +1,22 @@
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import { Home, SignIn, SignUp } from './containers';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
+import { createBrowserHistory as history } from 'history';
 
 export default function App() {
   return (
-    <Router>
+    <Router history={history()}>
       <div>
         <Switch>
           <Route path="/signup">
             <SignUp />
           </Route>
-          <Route path="/dashboard">
-            <Home />
+          <Route path="/signin">
+            <SignIn />
           </Route>
           <Route path="/">
-            <SignIn />
+            <Home />
           </Route>
         </Switch>
       </div >

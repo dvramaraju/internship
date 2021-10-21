@@ -11,12 +11,19 @@ import {
   Typography,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState } from "react";
 
 const theme = createTheme();
 
 export const SignIn = () => {
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: ""
+  })
+
   const handleSubmit = (event: any) => {
     event.preventDefault()
+    // setLoginDetails({ email, password })
   };
 
   return (
@@ -36,7 +43,6 @@ export const SignIn = () => {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -48,6 +54,7 @@ export const SignIn = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onChange={(event: any) => { setLoginDetails({ ...loginDetails, email: event.target.value }) }}
               autoFocus
             />
             <TextField
@@ -56,6 +63,7 @@ export const SignIn = () => {
               fullWidth
               name="password"
               label="Password"
+              onChange={(event: any) => { setLoginDetails({ ...loginDetails, password: event.target.value }) }}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -64,15 +72,17 @@ export const SignIn = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              onClick={handleSubmit}
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <a href="/dashboard">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                onClick={() => handleSubmit(loginDetails)}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+            </a>
             <Grid container>
               <Grid item xs>
                 <Link href="/" variant="body2">

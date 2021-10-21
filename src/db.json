@@ -1,3 +1,34 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "71EBAFB8-8902-4A22-9617-A773AFEB0A36",
+      "age": 15,
+      "email": "bala@mail.com",
+      "userName": "balaram",
+      "firstName": "bala",
+      "lastName": "ram",
+      "password": "123456",
+      "confirmPassword": "023456"
+    },
+    {
+      "id": "A716072E-06CD-4A64-B833-1F4F23F3EE0C",
+      "age": 22,
+      "email": "Ramarajudv21@gmail.com",
+      "userName": "ramaraju",
+      "firstName": "rama",
+      "lastName": "raju",
+      "password": "123456",
+      "confirmPassword": "023456"
+    },
+    {
+      "id": "xogJY-N",
+      "age": "",
+      "email": "",
+      "userName": "",
+      "firstName": "",
+      "lastName": "",
+      "password": "",
+      "confirmPassword": ""
+    }
+  ]
 }
