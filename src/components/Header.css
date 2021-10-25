@@ -1,5 +1,5 @@
 .headerLeft {
-  background-color: #dfc12a;
+  width: 15%;
 }
 .headerCenter {
   background-color: #ad12fc;
@@ -11,6 +11,5 @@ h2 {
   color: antiquewhite;
 }
 .headerRight {
-  background-color: #12adfc;
-  display: "flex";
+  padding: auto;
 }

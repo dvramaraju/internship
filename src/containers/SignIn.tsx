@@ -23,9 +23,7 @@ export const SignIn = () => {
   const history = useHistory()
 
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  function validateForm() {
-    return loginDetails.email.length > 0 && loginDetails.password.length > 5 && re.test(String(loginDetails.email).toLowerCase());
-  }
+  const validateForm = (): boolean => loginDetails.email.length > 0 && loginDetails.password.length > 5 && re.test(String(loginDetails.email).toLowerCase())
 
   function handleSubmit(event: any) {
     event.preventDefault();

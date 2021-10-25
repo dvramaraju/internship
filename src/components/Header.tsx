@@ -1,12 +1,10 @@
 import { Avatar } from "@mui/material";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown, SplitButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
 export const Header = () => {
-  const handleLogout = () => {
-    <Link to="/signin">Logout</Link>
-  };
+  const handleLogout = () => <Link to="/signin">Logout</Link>;
 
   return (
     <div
@@ -18,7 +16,7 @@ export const Header = () => {
       }}
     >
       <div className="headerLeft">
-        <h2><Link style={{ color: "white", textDecoration: "none" }} to="/">Home</Link></h2>
+        <img src="/footer-logo.png" alt="" />
       </div>
       <div className="headerCenter">
         <h2><Link style={{ color: "white", textDecoration: "none" }} to="/">Home</Link></h2>
@@ -28,16 +26,14 @@ export const Header = () => {
         <h2><Link style={{ color: "white", textDecoration: "none" }} to="/search">Search</Link></h2>
       </div>
       <div className="headerRight">
-        <DropdownButton
-          style={{ display: "flex" }}
-          size="sm"
+        <SplitButton
+          key="Primary"
+          id="dropdown-split-variants-Primary"
+          variant="primary"
           title={<Avatar />}
         >
-          {}
-          <Dropdown.Item href="/signin" onClick={handleLogout}>
-            Log In
-          </Dropdown.Item>
-        </DropdownButton>
+          <Dropdown.Item eventKey="1" onClick={() => handleLogout()}>Louout</Dropdown.Item>
+        </SplitButton>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { v1 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import { useState } from "react";
 import {
   Box,
@@ -33,7 +33,7 @@ export type AuthUser = {
 export const SignUp = () => {
   const [details, setDetails] = useState({
     id: "",
-    age: "",
+    age: 0,
     email: "",
     userName: "",
     firstName: "",
@@ -41,8 +41,10 @@ export const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
-
-  const validateForm = () => details.firstName.length > 3 && details.lastName.length > 3 && details.userName.length > 0 && details.email.length > 0 && details.password.length > 5 && details.confirmPassword.length > 5 && details.password === details.confirmPassword && details.age !== "";
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const validateForm = (): boolean => {
+    return details.firstName.length >= 3 && details.lastName.length >= 3 && details.userName.length >= 3 && re.test(String(details.email).toLowerCase()) && details.email.length !== 0 && details.password.length > 5 && details.confirmPassword.length > 5 && details.password === details.confirmPassword && details.age !== 0;
+  };
 
   const history = useHistory()
 
@@ -164,10 +166,10 @@ export const SignUp = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={details.age}
+                  value={Number(details.age)}
                   // label="Age"
                   onChange={(event) => {
-                    setDetails({ ...details, age: event.target.value })
+                    setDetails({ ...details, age: Number(event.target.value) })
                   }}
                 >
                   {[...Array(100)].map((e, i) => {
