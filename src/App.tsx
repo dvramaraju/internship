@@ -12,14 +12,17 @@ export default function App() {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route exact path="/work">
+        <Route path="/work">
           <Work />
         </Route>
         <Route path="/profile">
           <Profile />
         </Route>
-        <Route exact path="/signin">
+        <Route path="/signin">
           <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
         <Route path="/employee">
           <Employes />

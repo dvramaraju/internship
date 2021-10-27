@@ -1,25 +1,29 @@
 import { Avatar } from "@mui/material";
 import { useState } from "react";
 import { Dropdown, SplitButton } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Header.css";
 
 export const Header = () => {
   const [status, setStatus] = useState(false);
-  const handleLogout = () => {
-    setStatus(true);
-    < Link to="/signin" > Logout</Link >;
-  };
+  const history = useHistory();
   const handleLogin = () => {
+    setStatus(true);
+    history.push("/signin");
+    <Link to="/signin">Login</Link >;
+  };
+
+  const handleLogout = () => {
     setStatus(false);
-    < Link to="/signin" > Logout</Link >
+    history.push("/signin");
+    <Link to="/signin">Logout</Link >;
   };
 
   return (
     <div
       style={{
         backgroundColor: "#dfdfdf",
-        padding: "1rem 5rem",
+        padding: "1rem 2rem",
         display: "flex",
         justifyContent: "space-between",
       }}
@@ -41,10 +45,9 @@ export const Header = () => {
           variant="primary"
           title={<Avatar />}
         >
-          {status ?
-            <Dropdown.Item eventKey="1" onClick={() => handleLogout()}>Louout</Dropdown.Item>
-            :
-            <Dropdown.Item eventKey="1" onClick={() => handleLogin()}>Login</Dropdown.Item>
+          {status
+            ? <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+            : <Dropdown.Item onClick={handleLogin}>Log IN</Dropdown.Item>
           }
         </SplitButton>
       </div>
