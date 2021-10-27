@@ -1,8 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Employes, Home, SignIn, SignUp } from './containers';
+import { Home, Profile, SignIn, SignUp, Work } from './containers';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
+import { Employes } from './containers/Employe';
 
 export default function App() {
   return (
@@ -11,13 +12,19 @@ export default function App() {
         <Route path="/signup">
           <SignUp />
         </Route>
+        <Route exact path="/work">
+          <Work />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
         <Route exact path="/signin">
           <SignIn />
         </Route>
-        <Route path="/employes">
+        <Route path="/employee">
           <Employes />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

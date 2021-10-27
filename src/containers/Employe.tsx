@@ -1,31 +1,57 @@
-import { Card, Typography } from "@mui/material";
-import { Person, PersonType } from "../components/interface";
 import { Header } from "../components/Header";
+import DataTable from "react-data-table-component";
+import { SetStateAction, useEffect, useState } from "react";
+import axios, { AxiosResponse } from "axios";
+import { Persons } from "../components";
 
-export const Employes = () => (
-  <div>
-    <Header />
+const column = [
+  {
+    name: "id",
+    selector: (row: any) => row.id
+  },
+  {
+    name: "User Name",
+    selector: (row: any) => row.userName
+  },
+  {
+    name: "First Name",
+    selector: (row: any) => row.firstName
+  },
+  {
+    name: "Last Name",
+    selector: (row: any) => row.lastName
+  },
+  {
+    name: "Email",
+    selector: (row: any) => row.email
+  },
+  {
+    name: "Age",
+    selector: (row: any) => row.age
+  },
+]
+
+export function Employes() {
+  const [user, setUser]: SetStateAction<any> = useState();
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/users")
+      .then((res: AxiosResponse<Persons | any>): void => setUser(res.data))
+      .catch((error: Promise<void>): void => console.log(error))
+  }, [])
+  console.log(user)
+  // user.forEach((res: any) => console.log(res))
+
+  return (
     <div>
-      <Typography variant="h5">Total No of items in List:{Person.length}</Typography>
-      {Person.map((res: PersonType) =>
-        <Card sx={{ minWidth: 275 }} className="m-5 pagination page-link" key={res.id}>
-          <Typography variant="h5" component="div">
-            <strong>Person Name</strong>: {res.prefix} {res.findName}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} className="mx-5" color="text.primary">
-            <strong>Comapny Name</strong>: {res.company}<br />
-            <strong>Company Suffix</strong>: {res.companySuffix}<br />
-            <strong>Job Area</strong>: {res.jobArea}<br />
-            <strong>Job Descriptor</strong>: {res.jobDescriptor}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} className="mx-5" color="text.primary">
-            <strong>Address</strong>:{res.address.cityPrefix}, {res.address.cityName}, {res.address.citySuffix}, {res.address.state}, {res.address.country}, {res.address.zipcode}.
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} className="mx-5" color="text.primary">
-            <strong>Pet</strong>: <br /><div className="my-1 mx-5"><b>Animal Type</b>: Dog,<br /><b>Dog Type</b>: {res.pet}.</div>
-          </Typography>
-        </Card>
-      )}
+      <Header />
+      <div>
+        <DataTable
+          columns={column}
+          data={user}
+          selectableRows
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
