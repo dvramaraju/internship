@@ -53,7 +53,7 @@ export const SignUp = () => {
     console.log(details)
     setDetails({ ...details, id: uuidv4().toUpperCase() })
     axios.post("http://localhost:8000/users", details)
-    history.push('/signin')
+    history.push('/')
   }
 
   return (

@@ -1,8 +1,4 @@
 import { Header } from "../components";
-// import DataTable from "react-data-table-component";
-// import { SetStateAction, useEffect, useState } from "react";
-// import axios, { AxiosResponse } from "axios";
-// import { Persons } from "../components/interface";
 
 export function Home() {
   return (

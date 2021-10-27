@@ -18,8 +18,8 @@ export default function App() {
         <Route path="/profile">
           <Profile />
         </Route>
-        <Route path="/signin">
-          <SignIn />
+        <Route path="/dashboard">
+          <Home />
         </Route>
         <Route path="/signup">
           <SignUp />
@@ -28,7 +28,7 @@ export default function App() {
           <Employes />
         </Route>
         <Route exact path="/">
-          <Home />
+          <SignIn />
         </Route>
       </Switch>
     </Router>
