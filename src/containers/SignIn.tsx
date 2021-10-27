@@ -28,7 +28,7 @@ export const SignIn = () => {
   function handleSubmit(event: any) {
     event.preventDefault();
     axios.get(`http://localhost:8000/users?email=${event.target.value}`).then((value: any) => {
-      value && value !== loginDetails.email ? history.push("/") : alert("User not exist")
+      value && value !== loginDetails.email ? history.push("/dashboard") : alert("User not exist")
     })
   }
 
