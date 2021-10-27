@@ -1,22 +1,14 @@
 import { Avatar } from "@mui/material";
-import { useState } from "react";
 import { Dropdown, SplitButton } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "./Header.css";
 
 export const Header = () => {
-  const [status, setStatus] = useState(false);
   const history = useHistory();
-  const handleLogin = () => {
-    setStatus(true);
-    history.push("/signin");
-    <Link to="/signin">Login</Link >;
-  };
 
   const handleLogout = () => {
-    setStatus(false);
-    history.push("/signin");
-    <Link to="/signin">Logout</Link >;
+    history.push("/");
+    <Link to="/">Logout</Link >;
   };
 
   return (
@@ -32,7 +24,7 @@ export const Header = () => {
         <img src="/footer-logo.png" alt="" />
       </div>
       <div className="headerCenter">
-        <h2><Link style={{ color: "white", textDecoration: "none" }} to="/">Home</Link></h2>
+        <h2><Link style={{ color: "white", textDecoration: "none" }} to="/dashboard">Home</Link></h2>
         <h2><Link style={{ color: "white", textDecoration: "none" }} to="/work">Work</Link></h2>
         <h2><Link style={{ color: "white", textDecoration: "none" }} to="/employee">Employee</Link></h2>
         <h2><Link style={{ color: "white", textDecoration: "none" }} to="/search">Search</Link></h2>
@@ -45,10 +37,7 @@ export const Header = () => {
           variant="primary"
           title={<Avatar />}
         >
-          {status
-            ? <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-            : <Dropdown.Item onClick={handleLogin}>Log IN</Dropdown.Item>
-          }
+          <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
         </SplitButton>
       </div>
     </div>
