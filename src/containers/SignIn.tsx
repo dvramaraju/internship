@@ -28,17 +28,12 @@ export const SignIn = () => {
   }
   const preventDef = (event: FormEvent<HTMLInputElement>) => event.preventDefault()
   function handleSubmit(email: string, password: string) {
-    // axios.post("https://reqres.in/api/login").then((res) => {
-    //   console.log(res.request)
-    //   if (email === loginDetails.email && password === loginDetails.password) {
-    //     history.push("/dashboard");
-    //     localStorage.setItem("user", JSON.stringify({ email, password, res }));
-    //   } else console.log("User Not Exist")
-    // })
     axios.request({ baseURL: "https://reqres.in/api/login" }).then((res) => {
-      email === loginDetails.email && password === loginDetails.password
-        ? history.push("/dashboard")
-        : alert("User Not Exist")
+      if (email === loginDetails.email && password === loginDetails.password) {
+        history.push("/dashboard")
+        sessionStorage.setItem("user", JSON.stringify({ email, password }))
+        localStorage.setItem("user", JSON.stringify({ email, password }))
+      } else alert("User Not Exist")
     });
   }
 
