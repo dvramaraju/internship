@@ -1,9 +1,11 @@
 import { Header } from "../components"
 
-export const Profile = () => {
+export default function Profile() {
   return (
-    <div>
+    <>
       <Header />
-    </div>
+      <div>
+      </div>
+    </>
   )
 }

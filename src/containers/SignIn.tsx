@@ -14,7 +14,7 @@ import axios from "axios";
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export const SignIn = () => {
+export default function SignIn() {
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: ""
@@ -24,17 +24,30 @@ export const SignIn = () => {
 
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const validateForm = (): boolean => {
-    return re.test(String(loginDetails.email).toLowerCase()) && loginDetails.password.length > 5;
+    return re.test(String(loginDetails.email).toLowerCase());
   }
   const preventDef = (event: FormEvent<HTMLInputElement>) => event.preventDefault()
-  function handleSubmit(email: string, password: string) {
-    axios.request({ baseURL: "https://reqres.in/api/login" }).then((res) => {
-      if (email === loginDetails.email && password === loginDetails.password) {
-        history.push("/dashboard")
-        sessionStorage.setItem("user", JSON.stringify({ email, password }))
-        localStorage.setItem("user", JSON.stringify({ email, password }))
-      } else alert("User Not Exist")
-    });
+
+  const handleSubmit = async (email: string, password: string) => {
+    console.log(email, password);
+    await axios.post('https://reqres.in/api/login', {
+      email: email,
+      password: password
+    })
+      .then((response: any) => {
+        const object: any = { email, password, token: response.data.token }
+        console.log(response.data.token);
+        localStorage.setItem("user", JSON.stringify(object));
+        sessionStorage.setItem("user", JSON.stringify(object));
+        history.push("/dashboard");
+        sessionStorage.getItem("user") !== null
+          ? history.push("/dashboard")
+          : history.push("/signin");
+        return false;
+      }, (error) => {
+        console.log(error);
+      })
+      .catch((error: any) => console.log(error));
   }
 
   return (

@@ -1,7 +1,9 @@
-import { Avatar } from "@mui/material";
+import { lazy } from "react";
 import { Dropdown, SplitButton } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import "./Header.css";
+
+const Avatar = lazy(() => import("@mui/material").then(({ Avatar }) => ({ default: Avatar })));
 
 export const Header = () => {
   const history = useHistory();
@@ -10,6 +12,7 @@ export const Header = () => {
     history.push("/");
     <Link to="/">Logout</Link >;
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
   };
 
   return (
@@ -21,7 +24,7 @@ export const Header = () => {
         justifyContent: "space-between",
       }}
     >
-      
+
       <div className="headerLeft">
         <img src="/footer-logo.png" alt="" />
       </div>
@@ -34,9 +37,9 @@ export const Header = () => {
       </div>
       <div className="headerRight">
         <SplitButton
-          key="Primary"
-          id="dropdown-split-variants-Primary"
-          variant="primary"
+          key="Secondary"
+          id="dropdown-split-variants-secondary"
+          variant="secondary"
           title={<Avatar />}
         >
           <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>

@@ -19,18 +19,7 @@ import {
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 
-export type AuthUser = {
-  id: string
-  firstName: string
-  lastName: string
-  userName: string
-  email: string
-  password: string
-  confirmPassword: string
-  age: string
-}
-
-export const SignUp = () => {
+export default function SignUp() {
   const [details, setDetails] = useState({
     id: "",
     age: 0,

@@ -1,6 +1,6 @@
 import { Header } from "../components"
 
-export const Work = () => {
+export default function Work() {
   return (
     <div>
       <Header />

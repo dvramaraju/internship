@@ -1,5 +1,10 @@
-import { Header } from "./Header";
-import { Persons } from "./interface"
+import { lazy } from "react";
+import { Persons } from "./interface";
+import { Loading } from "./Loading";
 
-export { Header }
+// const Header = lazy(() => import("./Header"));
+const Header = lazy(() => import("./Header").then(({ Header }) => ({ default: Header })));
+// const Loading = lazy(() => import("./Loading").then(({ Loading }) => ({ default: Loading })));
+
+export { Header, Loading };
 export type { Persons }

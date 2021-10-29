@@ -31,7 +31,7 @@ const column = [
   },
 ]
 
-export function Employes() {
+export default function Employes() {
   const [user, setUser]: SetStateAction<any> = useState();
 
   useEffect(() => {

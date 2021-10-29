@@ -3,10 +3,19 @@
 }
 
 .headerCenter {
-  background-color: #ad12fc;
   display: flex;
   justify-content: space-around;
-  width: 60%;
+  width: 70%;
+}
+
+.headerCenter > h2 :hover {
+  background-color: #ad12fc;
+  cursor: pointer;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 .headerRight {

@@ -1,8 +1,11 @@
-import { Employes } from "./Employe";
-import { Home } from "./Home";
-import { Profile } from "./Profile";
-import { SignIn } from "./SignIn";
-import { SignUp } from "./SignUp";
-import { Work } from "./Work"
+import { lazy } from "react";
+import SignIn from "./SignIn";
+
+const Employes = lazy(() => import("./Employe"));
+const Home = lazy(() => import("./Home"));
+const Profile = lazy(() => import("./Profile"));
+const SignUp = lazy(() => import("./SignUp"));
+const Work = lazy(() => import("./Work"));
+
 
 export { Employes, Home, Profile, SignIn, SignUp, Work };
