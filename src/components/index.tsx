@@ -1,5 +1,5 @@
 import { Header } from "./Header";
-import { Person, Persons, PersonType } from "./interface"
+import { Persons } from "./interface"
 
-export { Header, Person }
-export type { Persons, PersonType }
+export { Header }
+export type { Persons }

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { FormEvent, useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export const SignIn = () => {
   const [loginDetails, setLoginDetails] = useState({
@@ -20,7 +20,7 @@ export const SignIn = () => {
     password: ""
   })
 
-  // const history = useHistory()
+  const history = useHistory()
 
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const validateForm = (): boolean => {
@@ -35,7 +35,11 @@ export const SignIn = () => {
     //     localStorage.setItem("user", JSON.stringify({ email, password, res }));
     //   } else console.log("User Not Exist")
     // })
-    axios.request({ baseURL: "https://reqres.in/api/login" }).then((res) => { console.log(res) });
+    axios.request({ baseURL: "https://reqres.in/api/login" }).then((res) => {
+      email === loginDetails.email && password === loginDetails.password
+        ? history.push("/dashboard")
+        : alert("User Not Exist")
+    });
   }
 
   return (

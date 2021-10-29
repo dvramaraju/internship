@@ -39,8 +39,6 @@ export function Employes() {
       .then((res: AxiosResponse<Persons | any>): void => setUser(res.data))
       .catch((error: Promise<void>): void => console.log(error))
   }, [])
-  console.log(user)
-  // user.forEach((res: any) => console.log(res))
 
   return (
     <div>
