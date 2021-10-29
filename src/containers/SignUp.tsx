@@ -43,7 +43,7 @@ export const SignUp = () => {
   });
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const validateForm = (): boolean => {
-    return details.firstName.length >= 3 && details.lastName.length >= 3 && details.userName.length >= 3 && re.test(String(details.email).toLowerCase()) && details.email.length !== 0 && details.password.length > 5 && details.confirmPassword.length > 5 && details.password === details.confirmPassword && details.age !== 0;
+    return details.firstName.length >= 3 && details.lastName.length >= 3 && details.userName.length >= 3 && re.test(String(details.email).toLowerCase()) && details.password.length > 5 && details.confirmPassword.length > 5 && details.password === details.confirmPassword && details.age !== 0;
   };
 
   const history = useHistory()
@@ -167,13 +167,13 @@ export const SignUp = () => {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={Number(details.age)}
-                  // label="Age"
+                  label="Age"
                   onChange={(event) => {
                     setDetails({ ...details, age: Number(event.target.value) })
                   }}
                 >
                   {[...Array(100)].map((e, i) => {
-                    return <MenuItem value={i + 1}>{i + 1}</MenuItem>
+                    return <MenuItem value={i + 1} key={i + 1}>{i + 1}</MenuItem>
                   })}
                 </Select>
               </FormControl>

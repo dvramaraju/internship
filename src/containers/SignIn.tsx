@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 export const SignIn = () => {
@@ -23,13 +23,21 @@ export const SignIn = () => {
   const history = useHistory()
 
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const validateForm = (): boolean => loginDetails.email.length > 0 && loginDetails.password.length > 5 && re.test(String(loginDetails.email).toLowerCase())
-
-  function handleSubmit(event: any) {
-    event.preventDefault();
-    axios.get(`http://localhost:8000/users?email=${event.target.value}`).then((value: any) => {
-      value && value !== loginDetails.email ? history.push("/dashboard") : alert("User not exist")
-    })
+  const validateForm = (): boolean => {
+    return re.test(String(loginDetails.email).toLowerCase()) && loginDetails.password.length > 5;
+  }
+  const preventDef = (event: FormEvent<HTMLInputElement>) => event.preventDefault()
+  function handleSubmit(email: string, password: string) {
+    axios.request({ baseURL: `http://localhost:8000/users?email=${email}&password=${password}` })
+      .then((res: any) => {
+        const numb = res.data.length
+        if (Number(numb) !== 0) {
+          history.push("/dashboard");
+          localStorage.setItem("user", JSON.stringify(res.data[0]));
+        }
+        else console.log("User Not Exist");
+      })
+      .catch((error: any) => console.log(error))
   }
 
   return (
@@ -48,7 +56,7 @@ export const SignIn = () => {
         </Typography>
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={preventDef}
           sx={{ mt: 1 }}>
           <TextField
             margin="normal"
@@ -80,7 +88,7 @@ export const SignIn = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit(loginDetails.email, loginDetails.password)}
             disabled={!validateForm()}
             sx={{ mt: 3, mb: 2 }}
           >
@@ -100,6 +108,6 @@ export const SignIn = () => {
           </Grid>
         </Box>
       </Box>
-    </Container>
+    </Container >
   );
 }

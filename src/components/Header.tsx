@@ -9,6 +9,7 @@ export const Header = () => {
   const handleLogout = () => {
     history.push("/");
     <Link to="/">Logout</Link >;
+    localStorage.removeItem("user");
   };
 
   return (
@@ -20,6 +21,7 @@ export const Header = () => {
         justifyContent: "space-between",
       }}
     >
+      
       <div className="headerLeft">
         <img src="/footer-logo.png" alt="" />
       </div>
